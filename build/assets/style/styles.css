@@ -2,6 +2,12 @@
     border-radius: 0 !important;
 }
 
+.container, .row {
+    max-width: 100% !important;
+    margin:0;
+    padding: 0;
+}
+
 .card {
     background-position: 100%;
     background-size: cover;

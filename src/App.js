@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Listitem from './components/Listitem';
+// import Listitem from './components/LossModal';
+import _ from 'lodash';
+const logger = true;
+let log = (qualif = 'general mssg: ', mssg) => (logger) ? console.log( qualif + ': ', mssg) : '' ;
 
 class App extends Component {
   constructor(props){
@@ -22,33 +26,47 @@ class App extends Component {
         { id: 11 ,img: '/assets/images/summer.png'},
       ],
       guess: null,
-      answer: null,
       score: 0,
     }
   }
 
-  shuffle() {
-    let cut_per_click = this.state.images.slice();
-
-    let new_state_images = this.state.images.sort( this.sortCrazy );
-
-    console.log(new_state_images);
-    
-    this.setState({ 
-      images: new_state_images
-    });
-  }
-
-  sortCrazy(a, b){
-    console.log(a > Math.floor(Math.random() * Math.floor(b)));
-    return a > Math.floor(Math.random() * Math.floor(b));
-  }
-
   handleGuess = (e) => {
-    console.log(e.target.id);
-    this.shuffle();
-    this.setState({ guess: e });
-    
+    this.setState({ 
+      images: _.shuffle(this.state.images)
+    });
+    this.handleGuessCondition(e.target.id);
+  }
+
+  handleGuessCondition = ( made_guess ) => {
+      switch(this.state.guess){
+        case null :
+          //not set!
+          log('not set! ', made_guess)
+          this.setState({ guess: made_guess} );
+          break;
+        case made_guess :
+          // loss!
+          // show some loss stuff
+          log('loss! ', this.state.guess )
+          this.resetGameState();
+          break;
+        default :
+          // win!
+          log('win! ', this.state.guess)
+          this.setState((prevState, props) => {
+            log('prev score', prevState.score)
+            log('point', 1)
+            log('new score', prevState.score + 1)
+            return {score: prevState.score + 1};
+          });
+          this.resetGameState();
+          break; 
+      }
+  }
+
+  resetGameState = () => {
+    //reset the game state
+    this.setState({ guess: null } );
   }
 
   render() {
@@ -57,9 +75,11 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Click a CLick!</h1>
+          <p>Your Score: {this.state.score}</p>
         </header>
-        <div className="container">
+        <div className="container w-100">
             <Listitem images={this.state.images} makeGuess={this.handleGuess} />
+            {/* <LossModal /> */}
         </div>
         <footer>
           

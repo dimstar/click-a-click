@@ -21,8 +21,8 @@ class Listitem extends React.Component {
 
     render(){
         return (
-            <div className="list-wrapper row">
-                {this.state.image_list.map( ( curr_image, i )=> {
+            <div className="list-wrapper row w-100">
+                {this.props.images.map( ( curr_image, i ) => {
                     return <div onClick={this.state.makeGuess} id={curr_image.id} key={curr_image.id} className="card col-md-3 col-sm-2 col-xs-1" style={this.buildImageStyle(curr_image)}></div>
                 })}
             </div>
