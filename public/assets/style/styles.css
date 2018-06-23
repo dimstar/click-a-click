@@ -1,0 +1,11 @@
+* {
+    border-radius: 0 !important;
+}
+
+.card {
+    background-position: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 0 !important;
+    cursor: pointer;
+}
