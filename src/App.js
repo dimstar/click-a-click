@@ -4,6 +4,7 @@ import './App.css';
 import Listitem from './components/Listitem';
 // import Listitem from './components/LossModal';
 import _ from 'lodash';
+import TimeKeeper from './components/TimeKeeper';
 const logger = true;
 let log = (qualif = 'general mssg: ', mssg) => (logger) ? console.log( qualif + ': ', mssg) : '' ;
 
@@ -77,6 +78,7 @@ class App extends Component {
           <h1 className="App-title">Click a CLick!</h1>
           <p>Your Score: {this.state.score}</p>
         </header>
+        <TimeKeeper time={5} />
         <div className="container w-100">
             <Listitem images={this.state.images} makeGuess={this.handleGuess} />
             {/* <LossModal /> */}
