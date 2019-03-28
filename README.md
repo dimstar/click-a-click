@@ -1,7 +1,7 @@
 # Welcome to Click-A-Click
 ## A REACT BASED, IMAGE MEMEMORY GAME!
 
-[Go to this page](http://google.com), and start by clicking an image.
+[Go to this page](https://click-a-click.herokuapp.com/), and start by clicking an image.
 
 This images will then become jumbled! Where was the image you clicked? This is very important as your goal is now to click another image that you didn't click previously.
 
