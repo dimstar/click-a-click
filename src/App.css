@@ -26,3 +26,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.card {
+  transition: all 300ms;
+}
+
+.upside-down {
+  transform: rotate(90deg);
+}

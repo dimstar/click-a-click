@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Listitem from './components/Listitem';
-// import Listitem from './components/LossModal';
 import _ from 'lodash';
 import TimeKeeper from './components/TimeKeeper';
 const logger = true;
@@ -28,32 +26,27 @@ class App extends Component {
       ],
       guess: null,
       score: 0,
+      upsidedown: false,
     }
   }
 
   handleGuess = (e) => {
     this.setState({ 
-      images: _.shuffle(this.state.images)
+      images: _.shuffle(this.state.images),
+      upsidedown: true,
     });
-    this.handleGuessCondition(e.target.id);
+    this.handleGuessCondition(e.target.id); // @todo get state the fuck out of the dom
   }
 
   handleGuessCondition = ( made_guess ) => {
       switch(this.state.guess){
         case null :
-          //not set!
-          log('not set! ', made_guess)
           this.setState({ guess: made_guess} );
           break;
         case made_guess :
-          // loss!
-          // show some loss stuff
-          log('loss! ', this.state.guess )
           this.resetGameState();
           break;
         default :
-          // win!
-          log('win! ', this.state.guess)
           this.setState((prevState, props) => {
             log('prev score', prevState.score)
             log('point', 1)
@@ -67,20 +60,23 @@ class App extends Component {
 
   resetGameState = () => {
     //reset the game state
-    this.setState({ guess: null } );
+    this.setState({ guess: null, upsidedown: false } );
+  }
+
+  componentDidUpdate(){
+    log('app state', this.state.upsidedown);
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Click a CLick!</h1>
+          <h1 className="App-title">CLICK A CLICK!!!</h1>
           <p>Your Score: {this.state.score}</p>
         </header>
         <TimeKeeper time={5} />
         <div className="container w-100">
-            <Listitem images={this.state.images} makeGuess={this.handleGuess} />
+            <Listitem upsidedown={this.state.upsidedown} images={this.state.images} makeGuess={this.handleGuess} />
             {/* <LossModal /> */}
         </div>
         <footer>
