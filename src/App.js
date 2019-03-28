@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Listitem from './components/Listitem';
 import _ from 'lodash';
-import TimeKeeper from './components/TimeKeeper';
+// import TimeKeeper from './components/TimeKeeper';
 const logger = true;
 let log = (qualif = 'general mssg: ', mssg) => (logger) ? console.log( qualif + ': ', mssg) : '' ;
 
@@ -77,7 +77,7 @@ class App extends Component {
           <h1 className="App-title">CLICK A CLICK!!!</h1>
           <p>Your Score: {this.state.score}</p>
         </header>
-        <TimeKeeper time={this.state.time} />
+        {/* <TimeKeeper time={this.state.time} /> */}
         <div className="container w-100">
             <Listitem upsidedown={this.state.upsidedown} images={this.state.images} makeGuess={this.handleGuess} />
             {/* <LossModal /> */}
