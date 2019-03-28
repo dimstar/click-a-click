@@ -28,9 +28,5 @@
 }
 
 .card {
-  transition: all 300ms;
-}
-
-.upside-down {
-  transform: rotate(90deg);
+  transition: transform 300ms;
 }

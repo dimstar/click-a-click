@@ -27,13 +27,16 @@ class App extends Component {
       guess: null,
       score: 0,
       upsidedown: false,
+      time: 5,
     }
   }
 
   handleGuess = (e) => {
-    this.setState({ 
-      images: _.shuffle(this.state.images),
-      upsidedown: true,
+    this.setState((state, props) => { 
+      return {
+        images: (state.upsidedown === false) ? _.shuffle(this.state.images) : this.state.images,
+        upsidedown: true,
+      };
     });
     this.handleGuessCondition(e.target.id); // @todo get state the fuck out of the dom
   }
@@ -60,7 +63,7 @@ class App extends Component {
 
   resetGameState = () => {
     //reset the game state
-    this.setState({ guess: null, upsidedown: false } );
+    this.setState({ guess: null, upsidedown: false, time: 5 } );
   }
 
   componentDidUpdate(){
@@ -74,7 +77,7 @@ class App extends Component {
           <h1 className="App-title">CLICK A CLICK!!!</h1>
           <p>Your Score: {this.state.score}</p>
         </header>
-        <TimeKeeper time={5} />
+        <TimeKeeper time={this.state.time} />
         <div className="container w-100">
             <Listitem upsidedown={this.state.upsidedown} images={this.state.images} makeGuess={this.handleGuess} />
             {/* <LossModal /> */}
